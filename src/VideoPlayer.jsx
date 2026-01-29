@@ -16,26 +16,32 @@ function VideoPlayer() {
     const [count, setCount] = useState(0); // Unrelated counter
 
     // TODO: Create a ref for the video element
-
+    const videoref = useRef(null)
     // BUG: This recreates the value on every render
-    let renderCount = 0;
-    renderCount++;
+    //let renderCount = 0;
+    const renderCount = useRef(0);
+    renderCount.current++;
     console.log('Renders:', renderCount); // Always shows 1!
 
     const handlePlayPause = () => {
         // TODO: Use ref to call video.play() or video.pause()
         // Don't use document.querySelector!
+        if (isPlaying)
+            videoref.current.pause();
+        else
+            videoref.current.play();
         setIsPlaying(!isPlaying);
     };
 
     const handleRestart = () => {
         // TODO: Reset video to start (currentTime = 0)
+        videoref.current.currentTime = 0;
     };
 
     return (
         <div>
             {/* TODO: Attach ref to video element */}
-            <video width="300" src="https://www.w3schools.com/html/mov_bbb.mp4" />
+            <video ref={videoref} width="300" src="https://www.w3schools.com/html/mov_bbb.mp4" />
 
             <div>
                 <button onClick={handlePlayPause}>
@@ -47,7 +53,7 @@ function VideoPlayer() {
                 </button>
             </div>
 
-            <p>Render count: {renderCount}</p>
+            <p>Render count: {renderCount.current}</p>
         </div>
     );
 }

@@ -14,13 +14,14 @@ Key concepts: Context creation, Provider, useContext, avoiding prop drilling
 import { useState, createContext, useContext } from 'react';
 
 // TODO: Create ThemeContext
-// const ThemeContext = createContext();
+const ThemeContext = createContext();
 
-function App() {
+function Appcontext() {
     const [theme, setTheme] = useState('light');
 
     const toggleTheme = () => {
         setTheme(theme === 'light' ? 'dark' : 'light');
+        console.log("toogled+" + theme)
     };
 
     // TODO: Wrap children in ThemeContext.Provider
@@ -32,8 +33,10 @@ function App() {
             color: theme === 'light' ? '#000' : '#fff',
             minHeight: '100vh'
         }}>
-            <Header />
-            <Main />
+            <ThemeContext.Provider value={{ theme, toggleTheme }}>
+                <Header />
+                <Main />
+            </ThemeContext.Provider>
         </div>
     );
 }
@@ -41,11 +44,12 @@ function App() {
 // BUG: These components need theme but it's not passed as props
 function Header() {
     // TODO: Use useContext to get theme
-    // const { theme, toggleTheme } = useContext(ThemeContext);
+    const { theme, toggleTheme } = useContext(ThemeContext);
 
     return (
         <header>
-            <h1>My App (Theme: ???)</h1>
+            <h1>My App (Theme: {theme})</h1>
+            <button onClick={() => toggleTheme()} >Toggle </button>
             {/* TODO: Add button to toggle theme */}
         </header>
     );
@@ -54,6 +58,7 @@ function Header() {
 function Main() {
     return (
         <div>
+
             <Sidebar />
             <Content />
         </div>
@@ -62,12 +67,17 @@ function Main() {
 
 function Sidebar() {
     // TODO: Use useContext to access theme
-    return <aside>Sidebar (Theme: ???)</aside>;
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+
+    return <aside>Sidebar (Theme: {theme})</aside>;
 }
 
 function Content() {
     // TODO: Use useContext to access theme
-    return <main>Content (Theme: ???)</main>;
+    const { theme, toggleTheme } = useContext(ThemeContext);
+
+    return <main>Content (Theme: {theme})</main>;
 }
 
-export default App;
+export default Appcontext;

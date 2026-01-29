@@ -9,49 +9,68 @@ Handle the step input with dispatch({ type: 'setStep', payload: value })
 Key concepts: useReducer for complex state, actions, dispatch
 */
 
-import { useState, useReducer } from 'react';
+import { useState, useReducer, } from 'react';
 
 // TODO: Define reducer function
 // Should handle: 'increment', 'decrement', 'reset', 'set'
 function counterReducer(state, action) {
     // Your code here
+    switch (action.type) {
+        case ('increment'):
+            return { ...state, count: state.count + state.step }
+        case ('decrement'):
+            return { ...state, count: state.count - state.step }
+        case ('reset'):
+            return { count: 0, step: 1 }
+        case ('setStep'):
+            return { count: state.count, step: action.payload }
+        default:
+            return state;
+
+
+    }
+
 }
 
 function Counter() {
     // BUG: Managing related state separately is messy
-    const [count, setCount] = useState(0);
-    const [step, setStep] = useState(1);
+    // const [count, setCount] = useState(0);
+    // const [step, setStep] = useState(1);
 
     // TODO: Replace useState with useReducer
-    // const [state, dispatch] = useReducer(counterReducer, { count: 0, step: 1 });
+    //const [state, dispatch] = useReducer(reducer, initialState);
+    const [state, dispatch] = useReducer(counterReducer, { count: 0, step: 1 });
 
-    const increment = () => {
-        setCount(count + step);
-    };
+    /* const increment = () => {
+         setCount(count + step);
+     };
+ 
+     const decrement = () => {
+         setCount(count - step);
+     };
+ 
+     const reset = () => {
+         setCount(0);
+         setStep(1);
+     };*/
+    //dispatch({ type: 'increment' })
 
-    const decrement = () => {
-        setCount(count - step);
-    };
 
-    const reset = () => {
-        setCount(0);
-        setStep(1);
-    };
 
     return (
         <div>
-            <h2>Count: {count}</h2>
+            <h2>Count: {state.count}</h2>
             <input
                 type="number"
-                value={step}
-                onChange={(e) => setStep(Number(e.target.value))}
+                value={state.step}
+                onChange={(e) => dispatch({ type: 'setStep', payload: Number(e.target.value) })}
                 placeholder="Step"
             />
 
             <div>
-                <button onClick={increment}>+{step}</button>
-                <button onClick={decrement}>-{step}</button>
-                <button onClick={reset}>Reset</button>
+                <button onClick={() => dispatch({ type: 'increment' })}>+{state.step}</button>
+                <button onClick={() => dispatch({ type: 'decrement' })}>-{state.step}</button>
+                <button onClick={() => dispatch({ type: 'reset' })}>Reset</button>
             </div>
         </div>
     );

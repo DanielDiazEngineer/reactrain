@@ -64,6 +64,8 @@ function TodoApp() {
                 value={inputValue}
                 // TODO: Add the correct event handler here
                 onChange={handleinput}
+                //(e)=>  setInputValue(e.target.value)
+
                 // //tried this first {() =>  setInputValue(value)}
                 //{setInputValue(inputValue)}  this created infinitite loop
 

@@ -3,6 +3,11 @@ import './App.css';
 import TodoApp from './Todoapp';
 import UserApp from './Userprofile';
 import SearchApp from './ExpensiveList';
+import VideoPlayer from './VideoPlayer';
+import Counter from './Counter'
+import Appcontext from './Sidebar';
+import RegistrationForm from './RegistratonForm';
+import { TaskPriorityManager } from './Taskpriorityblank';
 
 function App() {
   return (
@@ -22,7 +27,7 @@ function App() {
           Learn React
         </a>
       </header>*/}</>
-      <SearchApp></SearchApp>
+      <TaskPriorityManager></TaskPriorityManager>
     </div>
   );
 }

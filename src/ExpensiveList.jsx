@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect, React } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 // This is an expensive component that you don't want re-rendering unnecessarily
 const ExpensiveList = React.memo(function ExpensiveList({ items, onItemClick }) {
