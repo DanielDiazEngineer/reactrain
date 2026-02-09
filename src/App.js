@@ -8,6 +8,8 @@ import Counter from './Counter'
 import Appcontext from './Sidebar';
 import RegistrationForm from './RegistratonForm';
 import { TaskPriorityManager } from './Taskpriorityblank';
+import TaskTracker from './tasksecound';
+import UserDirectory from './userDirectory';
 
 function App() {
   return (
@@ -27,7 +29,7 @@ function App() {
           Learn React
         </a>
       </header>*/}</>
-      <TaskPriorityManager></TaskPriorityManager>
+      <UserDirectory></UserDirectory>
     </div>
   );
 }
