@@ -10,6 +10,13 @@ import RegistrationForm from './RegistratonForm';
 import { TaskPriorityManager } from './Taskpriorityblank';
 import TaskTracker from './tasksecound';
 import UserDirectory from './userDirectory';
+import UserList from './userList';
+import ProductPage from './productPage';
+import NotificationCenter from './Notificationcenter';
+import AuthContextApp from './AuthContext';
+import ShoppingCart from './shoppingCartReducer';
+import RepoExplorer from './RepoExplorer';
+import SignupForm from './SignupForm';
 
 function App() {
   return (
@@ -29,7 +36,7 @@ function App() {
           Learn React
         </a>
       </header>*/}</>
-      <UserDirectory></UserDirectory>
+      <SignupForm></SignupForm>
     </div>
   );
 }
